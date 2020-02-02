@@ -1,0 +1,19 @@
+name: Main
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: yarn --frozen-lockfile
+      - run: yarn test
+        env:
+          CI: true
+      - run: yarn lint:js
+      - run: yarn lint:hbs
+      - run: yarn prettier:check
