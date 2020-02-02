@@ -15,7 +15,9 @@
     "lint:hbs": "ember-template-lint .",
     "lint:js": "eslint .",
     "start": "ember serve",
-    "test": "ember test"
+    "test": "ember test",
+    "prettier": "node_modules/.bin/prettier --write \"{addon,app,config,mirage,tests}/**/*.{hbs,js,scss}\"",
+    "prettier:check": "node_modules/.bin/prettier --list-different \"{addon,app,config,mirage,tests}/**/*.{hbs,js,scss}\""
   },
   "devDependencies": {
     "@ember/optional-features": "^1.1.0",
@@ -42,6 +44,7 @@
     "eslint-plugin-ember": "^7.7.1",
     "eslint-plugin-node": "^10.0.0",
     "loader.js": "^4.7.0",
+    "prettier": "^1.19.1",
     "qunit-dom": "^0.9.2"
   },
   "engines": {
