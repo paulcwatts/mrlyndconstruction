@@ -17,3 +17,15 @@ jobs:
       - run: yarn lint:js
       - run: yarn lint:hbs
       - run: yarn prettier:check
+      - name: Build production
+        run: yarn build --environment=production
+        if: github.ref != 'refs/heads/master'
+      - name: Deploy production
+        if: github.ref == 'refs/heads/master'
+        run: yarn deploy
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          CFN_HOSTNAME: ${{ secrets.CFN_HOSTNAME }}
+          CFN_DOMAINNAME: ${{ secrets.CFN_DOMAINNAME }}
+          CFN_CERTIFICATE: ${{ secrets.CFN_CERTIFICATE }}
